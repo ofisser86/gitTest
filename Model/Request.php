@@ -13,7 +13,7 @@ class Request
 
 	private function getKey($from, $key, $default = null)
 	{  		$arrThisFrom = $this->$from;
-  		return (isset($arrThisFrom[$key]) ? $arrThisFrom[$key] : $default);	}
+  		return (!empty($arrThisFrom[$key]) ? $arrThisFrom[$key] : $default);	}
 
 	public function get($key, $default = null)
 	{		return $this->getKey('get', $key, $default);	}
