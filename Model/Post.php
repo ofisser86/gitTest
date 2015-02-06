@@ -42,12 +42,16 @@ class Post {
         return $this->content;
 
     }
+
+    /**
+     * @param $author
+     */
     public function setAuthor($author)
     {
         $this->author = $author;
 
     }
-    public function getAutor()
+    public function getAuthor()
     {
         return $this->$author;
     }

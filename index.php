@@ -6,7 +6,8 @@ define('CONTROLLER_DIR', ROOT . 'Controller' . DS);
 define('MODEL_DIR', ROOT . 'Model' . DS);
 
 // include global vars class
-require_once(MODEL_DIR . 'Request.php');
+//require_once MODEL_DIR . 'Request.php';
+require_once "Model/Request.php";
 
 if (empty($_GET['path'])) {
 	$controller = $action = 'index';
@@ -29,7 +30,7 @@ $path = CONTROLLER_DIR . $controller . '.php';
 if (!file_exists($path)) {
 	die("404: {$controller} not found");
 }
-require_once($path);
+require_once ($path);
 
 // check if class exists and get instance
 if (!class_exists($controller)) {

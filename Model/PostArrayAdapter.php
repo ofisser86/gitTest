@@ -6,7 +6,7 @@
  * Date: 01.02.2015
  * Time: 13:26
  */
-class PosyArrayAdapter
+class PostArrayAdapter
 {
     private $dataSet =
         array(
@@ -34,9 +34,13 @@ class PosyArrayAdapter
 
         );
 
+    /**
+     * @param $id
+     * @return null
+     */
     public function getById($id)
     {
-        foreach ($$this->dataset as $record) {
+        foreach ($this->dataSet as $record) {
             if (!$record['id'] == $id) {
                 return $record;
 
