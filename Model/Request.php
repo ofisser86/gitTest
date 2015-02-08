@@ -1,4 +1,11 @@
 <?php
+/*
+*
+*  Request Class for globals - GTE, POST, SERVER
+*
+*/
+
+namespace Model;
 
 class Request
 {	private $get = array();
@@ -13,7 +20,7 @@ class Request
 
 	private function getKey($from, $key, $default = null)
 	{  		$arrThisFrom = $this->$from;
-  		return (!empty($arrThisFrom[$key]) ? $arrThisFrom[$key] : $default);	}
+  		return ( !empty($arrThisFrom[$key]) ? $arrThisFrom[$key] : $default );	}
 
 	public function get($key, $default = null)
 	{		return $this->getKey('get', $key, $default);	}

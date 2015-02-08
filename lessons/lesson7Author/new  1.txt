@@ -1,0 +1,10 @@
+<?php
+if (!this->author instance_off Author && is_null($this->author)){				// is_numeric или можнопроверьть, писать вместо is_null($this->author)
+$mapper = new Author;
+$mapper->setAdapter(new PostArrayAdapter);
+$this->author=$mapper->getById($this->author);
+}
+return $this->author;
+
+Model\Post
+Model\post\Adtapter

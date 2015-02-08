@@ -1,60 +1,69 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Valentain
- * Date: 01.02.2015
- * Time: 12:39
- */
-class Post {
-    private $id;
-    private $title;
-    private $created;
-    private $content;
-    private $author;
+<?
+/*
+*
+*  Post Model - setters & getters for vars + get author obj
+*
+*/
 
-    public function  __controller ($id)
-    {
-       $this->$id = $id;
+namespace Model;
 
-    }
-    public  function getId()
-    {
-        return $this->id;
-    }
-    public  function setTitle($title)
-    {
-        $this->$title =$title;
+class Post
+{	private $id;
+	private $title;
+	private $created;
+	private $content;
+	private $author;
 
-    }
-    public function getTitle(){
+	public function __construct($id)
+	{		$this->id = $id;	}
 
-        return $this->title;
-    }
-    public function getCreated(){
-        return $this->created;
-    }
-    public function setContent($content)
-    {
-        $this->content = $content;
+	public function getId()
+	{		return $this->id;	}
 
-    }
-    public function getContent(){
-        return $this->content;
+    // title
+	public function setTitle($title)
+	{		$this->title = $title;	}
 
-    }
+	public function getTitle()
+	{
+		return $this->title;
+	}
 
-    /**
-     * @param $author
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
+	// content
+	public function setContent($content)
+	{
+		$this->content = $content;
+	}
 
-    }
-    public function getAuthor()
-    {
-        return $this->$author;
-    }
+	public function getContent()
+	{
+		return $this->content;
+	}
+
+	// author
+	public function setAuthor($author)
+	{
+		$this->author = $author;
+	}
+
+	public function getAuthor()
+	{
+		if (!$this->author instanceof Author && is_numeric($this->author)) {			$mapper = new \Model\Author\Mapper();
+			$adapter = new \Model\Author\Adapter\CArray();
+			$mapper->setAdapter($adapter);
+			$this->author = $mapper->getAuthorById($this->author);		}
+		return $this->author;
+	}
+
+	// created
+	public function setCreated($created)
+	{
+		$this->created = $created;
+	}
+
+	public function getCreated()
+	{		return $this->created;	}
 
 
-}
+
+}
