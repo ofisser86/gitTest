@@ -15,7 +15,7 @@ Registry::set('post.adapter', new \Model\Post\Adapter\CArray());
 // set data adapter
 //Registry::get('post.mapper')->setAdapter(Registry::get('post.adapter'));
 
-class Post
+class Post extends \Model\Controller
 {
 	//private $mapper;
 	public function __construct()
@@ -41,17 +41,34 @@ class Post
 
         // use method from mapper to search in data array
   		//$postById = $this->mapper->getPostById($id);
-  		$postById = Registry::get('post.mapper')->getPostById($id);
+		try {
+			$postById = Registry::get('post.mapper')->getPostById($id);
 
-  		// check if post with given ID exists
-  		//if (is_null($postById)) {
-  		//	die("404: post with ID = {$id} not found");
-  		//}
+			// check if post with given ID exists
+			//if (is_null($postById)) {
+			//	die("404: post with ID = {$id} not found");
+			//}
 
-  		// data out
-  		echo "<pre>";
-  		print_r($postById);
-        print_r($postById->getAuthor());
+			// data out
+			echo "<pre>";
+			print_r($postById);
+			print_r($postById->getAuthor());
+		}catch (\Model\Post\Exception\NotFoundException $e)
+		{
+			var_dump("Post{$id} not found");
+			throw $e;
+
+		}catch(\Model\Author\Exception\NotFoundException $e)
+		{
+			var_dump("author for {$id} not found");
+			// для того чтобы обнулить автора и кетч для автора больше не запускался,
+			$postById->setAuthor(null);
+
+		}
+
+		$postById->getAuthor();
+		$class = __CLASS__;
+		return $this->render(__FUNCTION__,array_pop(explode('\\',$class), array('post'=>$postById, 'author'=>$postAuthor)));
         echo "</pre>";
   		// action/controller sign
 		return "This is show action from post controller, ID = {$id}";

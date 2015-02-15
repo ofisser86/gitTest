@@ -1,4 +1,4 @@
-<?
+<?php
 namespace Model\Author\Adapter;
 
 class CArray

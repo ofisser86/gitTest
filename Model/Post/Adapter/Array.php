@@ -1,8 +1,9 @@
-<?
+<?php
 namespace Model\Post\Adapter;
 
 class Arrayy
-{	private $dataSet = array(
+{
+	private $dataSet = array(
 		array(
 			'id' => 1,
 			'title' => 'Happy New Year',
@@ -27,8 +28,15 @@ class Arrayy
 	);
 
 	public function getById($id)
-	{    	foreach ($this->dataSet as $record) {    		if ($record['id'] == $id) {    			return $record;    		}    	}
+	{
+    	foreach ($this->dataSet as $record) {
+    		if ($record['id'] == $id) {
+    			return $record;
+    		}
+    	}
 
-    	return null;	}
+    	return null;
+	}
 
-}
+
+}

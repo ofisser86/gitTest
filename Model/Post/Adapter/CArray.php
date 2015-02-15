@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 *
 *  Array  Adapter - simple given array
