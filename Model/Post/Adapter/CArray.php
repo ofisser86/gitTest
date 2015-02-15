@@ -8,13 +8,14 @@
 namespace Model\Post\Adapter;
 
 class CArray
-{	private $dataSet = array(
+{
+	private $dataSet = array(
 		array(
 			'id' => 1,
 			'title' => 'Pink Floyd',
 			'content' => 'REALLY, Pink Floyd? Because anyone with an education would understand that its grammatically incorrect to use double negatives. Only one line in, and youve already disproved your own damn argument.',
 			'created' => '10/16/2001 12:01:23',
-			'author' => 3
+			'author' => 333
 		),
 		array(
 			'id' => 11,
@@ -33,8 +34,15 @@ class CArray
 	);
 
 	public function getById($id)
-	{    	foreach ($this->dataSet as $record) {    		if ($record['id'] == $id) {    			return $record;    		}    	}
+	{
+    	foreach ($this->dataSet as $record) {
+    		if ($record['id'] == $id) {
+    			return $record;
+    		}
+    	}
 
-    	return null;	}
+    	throw new \Model\Post\Exception\NotFoundException('Post not found');
+	}
 
-}
+
+}

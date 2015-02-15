@@ -6,10 +6,11 @@
 */
 
 namespace Model\Author;
+use \Model\Registry;
 
 class Mapper
 {
-	private $adapter;
+	/*private $adapter;
 
 	public function setAdapter($a)
 	{
@@ -20,11 +21,13 @@ class Mapper
 	{
 		return $this->adapter;
 	}
+    */
 
 	// search in raw data using adapter and convert to object
 	public function getAuthorById($id)
 	{
-		$data = $this->adapter->getById($id);
+		//$data = $this->adapter->getById($id);
+		$data = Registry::get('author.adapter')->getById($id);
 		return (is_null($data) ? null : $this->d2o($data));
 	}
 

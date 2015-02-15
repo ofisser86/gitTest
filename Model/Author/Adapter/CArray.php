@@ -29,7 +29,7 @@ class CArray
     		}
     	}
 
-    	return null;
+    	throw new \Model\Author\Exception\NotFoundException('Author not found');
 	}
 
 

@@ -7,6 +7,10 @@
 
 namespace Model;
 
+// registerring mapper & adapter
+Registry::set('author.mapper', new \Model\Author\Mapper());
+Registry::set('author.adapter', new \Model\Author\Adapter\CArray());
+
 class Post
 {	private $id;
 	private $title;
@@ -48,10 +52,13 @@ class Post
 
 	public function getAuthor()
 	{
-		if (!$this->author instanceof Author && is_numeric($this->author)) {			$mapper = new \Model\Author\Mapper();
+		if (!$this->author instanceof Author && is_numeric($this->author)) {			/*$mapper = new \Model\Author\Mapper();
 			$adapter = new \Model\Author\Adapter\CArray();
 			$mapper->setAdapter($adapter);
-			$this->author = $mapper->getAuthorById($this->author);		}
+			$this->author = $mapper->getAuthorById($this->author);*/
+
+			$this->author = Registry::get('author.mapper')->getAuthorById($this->author);
+		}
 		return $this->author;
 	}
 

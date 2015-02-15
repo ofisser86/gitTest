@@ -6,31 +6,47 @@
 */
 
 namespace Controller;
+use Model\Registry;
+
+// registerring mapper & adapter
+Registry::set('post.mapper', new \Model\Post\Mapper());
+Registry::set('post.adapter', new \Model\Post\Adapter\CArray());
+
+// set data adapter
+//Registry::get('post.mapper')->setAdapter(Registry::get('post.adapter'));
 
 class Post
-{	private $mapper;
+{
+	//private $mapper;
 	public function __construct()
-	{		// correcponding mapper
-		$this->mapper = new \Model\Post\Mapper();
+	{
+		// correcponding mapper
+		//$this->mapper = new \Model\Post\Mapper();
 		// set data adapter
-		$postAdapter = new \Model\Post\Adapter\CArray();
+		//$postAdapter = new \Model\Post\Adapter\CArray();
 		//$postAdapter = new \Model\Post\Adapter\CFile();
 		//$postAdapter->setDataSet(FILES_DIR . 'PostData.txt');
-		$this->mapper->setAdapter($postAdapter);
-	}
+		//$this->mapper->setAdapter($postAdapter);
+
+	}
 
 	public function showAction(\Model\Request $request)
 	{
 		$id = $request->get('postId', null);
 
         // check if ID is set formally
-		if (is_null($id)) {			die("404: post ID is not set or is empty");		}
+		if (is_null($id)) {
+			die("404: post ID is not set or is empty");
+		}
 
         // use method from mapper to search in data array
-  		$postById = $this->mapper->getPostById($id);
+  		//$postById = $this->mapper->getPostById($id);
+  		$postById = Registry::get('post.mapper')->getPostById($id);
 
   		// check if post with given ID exists
-  		if (is_null($postById)) {  			die("404: post with ID = {$id} not found");  		}
+  		//if (is_null($postById)) {
+  		//	die("404: post with ID = {$id} not found");
+  		//}
 
   		// data out
   		echo "<pre>";
@@ -38,7 +54,9 @@ class Post
         print_r($postById->getAuthor());
         echo "</pre>";
   		// action/controller sign
-		return "This is show action from post controller, ID = {$id}";	}}
+		return "This is show action from post controller, ID = {$id}";
+	}
+}
 
 
 
